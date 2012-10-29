@@ -12,6 +12,12 @@ shopt -s nocasematch
 #
 ##
 
+# Only users with $UID 0 have root privileges
+ROOT_UID=0     
+
+# Non-root exit error
+E_NOTROOT=87   
+
 # Tomcat installation directory
 TOMCATDIR="/usr/local/tomcat"
 
@@ -77,12 +83,17 @@ while getopts "d:h" optname
       	":")
         	echo "No argument value for option $OPTARG"
         	;;
-      *)
-      # Should not occur
-        echo "I support Mitt Romney?!"
+      	  *)
+      		# Should not occur
+        	echo "I support Mitt Romney?!"
         ;;
     esac
 done
+
+if [[ $UID -ne 0 ]]; then
+	echo "Must be root to perform this operation"
+	exit $E_NOTROOT
+fi
 
 # Tomcat status
 STAT=$(netstat -na | grep 8080 | grep -v grep | awk '/LISTEN/ {print $6}')
