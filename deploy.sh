@@ -68,7 +68,7 @@ while getopts "d:h" optname
 		;;
 		"h")
 			echo "Usage: Should run as root user"
-			echo "deploy.sh [-d ] [-h ]"
+			echo "deploy.sh [-d <true|false>] [-h ]"
 			exit 0
 			;;
 		"?")
