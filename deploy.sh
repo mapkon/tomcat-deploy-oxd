@@ -63,7 +63,7 @@ while getopts "d:h" optname
 	do
 		case "$optname" in
 		"d")
-		# Pass delete to wipe tomcat logs
+		# Pass true to wipe tomcat logs
 		DELETELOGS=$OPTARG
 		;;
 		"h")
@@ -93,11 +93,11 @@ if [[ "$STAT" == "LISTEN" ]]; then
 
 	UNAME=$(whoami)
 
-	# Get PID of tomcat
+	# Get PID of tomcat process
 	PID=$(ps -u $UNAME | grep -i tomcat | grep -v grep | awk '{print $2}')
 
-	# Kill the tomcat process(es)
-	echo "Killing Tomcat Process: " $PID
+	# Kill the tomcat process
+	echo "Killing Tomcat Process:" $PID
 	kill -term $PID
 
 	# Deploy
@@ -106,7 +106,7 @@ if [[ "$STAT" == "LISTEN" ]]; then
 	# Complete
 	completed
 
-elif [[ "$STAT" == "" ]]; then
+elif [[ -z "$STAT" ]]; then
 
 	# Just deploy the file and start tomcat
 	echo "Tomcat not running. Proceeding to deploy"
