@@ -85,7 +85,7 @@ while getopts "d:h" optname
         	;;
       	  *)
       		# Should not occur
-        	echo "I support Mitt Romney?!"
+        	echo "The devil is in the details."
         ;;
     esac
 done
