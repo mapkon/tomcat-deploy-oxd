@@ -28,7 +28,7 @@ TOMCATBINDIR=$TOMCATDIR/bin
 TOMCATWEBAPPSDIR=$TOMCATDIR/webapps
 
 # OpenXdata maven build directory
-OXDWARDIR="$HOME/Dev/projects/openxdata/serverX/webapp/target"
+OXDWARDIR="$HOME/PATH_TO_OXD_WAR_FILE"
 
 # Does the actual moving of files and starting tomcat
 function deploy {
