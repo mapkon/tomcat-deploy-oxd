@@ -95,7 +95,10 @@ if [[ $UID -ne 0 ]]; then
 	exit $E_NOTROOT
 fi
 
-# Tomcat status
+# Allow tomcat to shutdown cleanly
+sh $TOMCATBINDIR/shutdown.sh
+
+# Check Tomcat status. Sometimes shutdown does not work due to hanging threads
 STAT=$(netstat -na | grep 8080 | grep -v grep | awk '/LISTEN/ {print $6}')
 
 if [[ "$STAT" == "LISTEN" ]]; then
@@ -107,7 +110,7 @@ if [[ "$STAT" == "LISTEN" ]]; then
 	# Get PID of tomcat process
 	PID=$(ps -u $UNAME | grep -i tomcat | grep -v grep | awk '{print $2}')
 
-	# Kill the tomcat process
+	# Kill the tomcat process manually
 	echo "Killing Tomcat Process:" $PID
 	kill -term $PID
 
