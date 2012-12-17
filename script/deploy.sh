@@ -95,15 +95,15 @@ if [[ $UID -ne 0 ]]; then
 	exit $E_NOTROOT
 fi
 
-# Allow tomcat to shutdown cleanly
-sh $TOMCATBINDIR/shutdown.sh
-
 # Check Tomcat status. Sometimes shutdown does not work due to hanging threads
 STAT=$(netstat -na | grep 8080 | grep -v grep | awk '/LISTEN/ {print $6}')
 
 if [[ "$STAT" == "LISTEN" ]]; then
 
 	echo "Tomcat running on default port."
+
+	# Allow tomcat to shutdown cleanly
+	sh $TOMCATBINDIR/shutdown.sh
 
 	UNAME=$(whoami)
 
