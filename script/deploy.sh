@@ -36,7 +36,7 @@ function deploy {
 	# wipe the logs
 	if [[ $DELETELOGS = "true" ]]; then
 		echo "Deleting Tomcat logs..."
-		rm $TOMCATDIR/logs/*
+		rm -rf $TOMCATDIR/logs/*
 	fi
 
 	# undeploy existing war file
